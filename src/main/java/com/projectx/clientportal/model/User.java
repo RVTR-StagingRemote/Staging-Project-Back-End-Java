@@ -21,9 +21,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Integer userId;
-    @Column
+    @Column(unique = true, nullable = false)
     private String email;
-    @Column
+    @Column(nullable = false)
     private String password;
     @Column
     private Boolean approved;
