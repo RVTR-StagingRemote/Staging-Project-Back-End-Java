@@ -5,6 +5,8 @@ import com.projectx.clientportal.repository.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("userService")
 public class UserService {
     UserDao userDao;
@@ -14,6 +16,15 @@ public class UserService {
         this.userDao = userDao;
     }
 
+    public User findUserById(Integer userId) {
+        return this.userDao.findById(userId).orElse(null);
+    }
+
+    // Currently, for testing purposes to see the User data in Postman
+    public List<User> findAllUsers() {
+        return this.userDao.findAll();
+    }
+
     public User createUser(User user) {
         User temp = this.userDao.findUserByEmail(user.getEmail());
         if(temp != null)
@@ -21,12 +32,13 @@ public class UserService {
         return this.userDao.save(user);
     }
 
-    public User getUserByEmail(String email) {
-        return this.userDao.findUserByEmail(email);
+    public User getUserByEmailAndPassword(String email, String password) {
+        return this.userDao.findUserByEmailAndPassword(email, password);
     }
 
     public User editUser(User user) {
-        User temp = this.userDao.findUserByEmail(user.getEmail());
+        System.out.println(user);
+        User temp = this.userDao.findById(user.getUserId()).orElse(null);
         if(temp == null)
             return null;
         else {
@@ -36,7 +48,7 @@ public class UserService {
                 temp.setPassword(user.getPassword());
             if(user.getApproved() != null)
                 temp.setApproved(user.getApproved());
-            return this.userDao.save(user);
+            return this.userDao.save(temp);
         }
     }
 
