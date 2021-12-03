@@ -1,5 +1,5 @@
-package com.projectx.clientportal.controller;
+package com.projectx.clientportal.utility;
 
 public class CrossOriginUtil {
-    static final String CROSS_ORIGIN_VALUE = "http://localhost:4200";
+    static final public String CROSS_ORIGIN_VALUE = "http://localhost:4200";
 }
