@@ -14,6 +14,7 @@ work what they are best at.
 - Mockito
 - H2
 - Postman
+- Json Web Tokens
 - JavaDocs
 
 ## Features
