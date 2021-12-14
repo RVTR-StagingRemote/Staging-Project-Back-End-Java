@@ -1,8 +1,45 @@
 package com.projectx.clientportal.service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service("clientService")
-public class ClientService {
+import com.projectx.clientportal.model.Client;
+import com.projectx.clientportal.repository.ClientDao;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Service("clientService")
+@Slf4j
+public class ClientService {
+	ClientDao clientDao;
+	
+	@Autowired
+	public ClientService(ClientDao clientDao) {
+		this.clientDao = clientDao;
+	}
+	
+	// Currently, for testing purposes to see the User data in Postman
+	public List<Client> findAllClients() {
+		log.info("clientService: findAllClients() call");
+		return this.clientDao.findAll();
+	}
+	
+	public Client findClientById(Integer clientId) {
+		log.info("clientService: findClientById() call");
+		return this.clientDao.findById(clientId).orElse(null);
+	}
+	
+	public Client createClient(Client client) {
+		Client temp = this.clientDao.findClientByCompanyName(client.getCompanyName());
+		if(temp != null) {
+			log.error("clientService: " + temp + " , already exist.");
+			return null;
+		} else {
+			Client result = this.clientDao.save(client);
+			log.info("clientService: " + result + " , successfully created.");
+			return result;
+		}
+	}
 }
