@@ -42,4 +42,17 @@ public class ClientService {
 			return result;
 		}
 	}
+	
+	public boolean deleteClient(Integer clientId) {
+		log.info("clientService: deleteClient() call");
+		Client temp = this.clientDao.findById(clientId).orElse(null);
+		if(temp == null) {
+			log.error("clientService: Client with id " + clientId + " , doesn't exist.");
+			return false;
+		} else {
+			this.clientDao.delete(temp);
+			log.info("clientService: Client with id" + clientId +  " , successfully deleted.");
+			return true;
+		}
+	}
 }
