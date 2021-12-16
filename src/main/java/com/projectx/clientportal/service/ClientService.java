@@ -29,14 +29,14 @@ public class ClientService {
 	public Client findClientById(Integer clientId) {
 		log.info("clientService: findClientById() call");
 		Client client = this.clientDao.findById(clientId).orElse(null);
-		if (client == null) log.error("clientService: client with id " + clientId + "not found.");
+		if (client == null) log.error("clientService: client with id " + clientId + " not found.");
 		return client;
 	}
 	
 	public Client findClientByCompanyName(String companyName) {
 		log.info("clientService: findClientByCompanyName() call");
 		Client client = this.clientDao.findClientByCompanyName(companyName);
-		if (client == null) log.error("clientService: client with companyName " + companyName + "not found.");
+		if (client == null) log.error("clientService: client with companyName " + companyName + " not found.");
 		return client;
 	}
 	

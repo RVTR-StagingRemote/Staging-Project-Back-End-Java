@@ -26,12 +26,12 @@ public class ClientController {
 	}
 	
 	// Currently, for testing purposes to see the User data in Postman
-	@GetMapping("client")
+	@GetMapping("clients")
 	public JsonResponse getAllClients() {
 		return new JsonResponse(true, "Clients :", this.clientServ.findAllClients());
 	}
 	
-	@GetMapping("client/{clientId}")
+	@GetMapping("client/id/{clientId}")
 	public JsonResponse getClientById(@PathVariable Integer clientId) {
 		JsonResponse jsonResponse;
 		Client reqClient = this.clientServ.findClientById(clientId);
@@ -39,13 +39,13 @@ public class ClientController {
 		if(reqClient != null) {
 			jsonResponse = new JsonResponse(true, "Client :", reqClient);
 		} else {
-			jsonResponse = new JsonResponse(false, "Client with id: " + clientId + "' doesn't exist.", null);
+			jsonResponse = new JsonResponse(false, "Client with id: " + clientId + " doesn't exist.", null);
 		}
 		
 		return jsonResponse;
 	}
 	
-	@GetMapping("client/{companyName}")
+	@GetMapping("client/name/{companyName}")
 	public JsonResponse getClientByCompanyName(@PathVariable String companyName) {
 		JsonResponse jsonResponse;
 		Client reqClient = this.clientServ.findClientByCompanyName(companyName);
