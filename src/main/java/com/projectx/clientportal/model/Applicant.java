@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.sql.Blob;
 
 // Will handle the Applicant's information and functionality
 
@@ -19,13 +20,9 @@ public class Applicant {
     @Column(name = "applicant_id")
     private Integer applicantId;
     @Column
-    private Byte[] resume;
+    private Blob resume;
     @Column
     private String aboutMe;
-    @Column
-    private String firstName;
-    @Column
-    private String lastName;
     @Column
     private String educationLevel;
     @Column
