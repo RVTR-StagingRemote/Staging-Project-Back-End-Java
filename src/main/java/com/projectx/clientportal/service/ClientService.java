@@ -28,7 +28,16 @@ public class ClientService {
 	
 	public Client findClientById(Integer clientId) {
 		log.info("clientService: findClientById() call");
-		return this.clientDao.findById(clientId).orElse(null);
+		Client client = this.clientDao.findById(clientId).orElse(null);
+		if (client == null) log.error("clientService: client with id " + clientId + "not found.");
+		return client;
+	}
+	
+	public Client findClientByCompanyName(String companyName) {
+		log.info("clientService: findClientByCompanyName() call");
+		Client client = this.clientDao.findClientByCompanyName(companyName);
+		if (client == null) log.error("clientService: client with companyName " + companyName + "not found.");
+		return client;
 	}
 	
 	public Client createClient(Client client) {
@@ -43,16 +52,6 @@ public class ClientService {
 		}
 	}
 	
-	public boolean deleteClient(Integer clientId) {
-		log.info("clientService: deleteClient() call");
-		Client temp = this.clientDao.findById(clientId).orElse(null);
-		if(temp == null) {
-			log.error("clientService: Client with id " + clientId + " , doesn't exist.");
-			return false;
-		} else {
-			this.clientDao.delete(temp);
-			log.info("clientService: Client with id" + clientId +  " , successfully deleted.");
-			return true;
-		}
-	}
+	
+	
 }
